@@ -9134,7 +9134,7 @@ return jQuery;
  * MIT Licensed.
  *
  * @module Tc
- * 
+ *
  */
 var Tc = Tc || {};
 
@@ -9151,21 +9151,21 @@ Tc.$ = jQuery.noConflict(false);
  */
 (function(){
     var initializing = false, fnTest = /xyz/.test(function() { xyz; }) ? /\b_super\b/ : /.*/;
-    
+
     // The base Class implementation (does nothing)
     this.Class = function(){
     };
-    
+
     // Create a new Class that inherits from this class
     Class.extend = function(prop){
         var _super = this.prototype;
-        
+
         // Instantiate a base class (but only create the instance,
         // don't run the init constructor)
         initializing = true;
         var prototype = new this();
         initializing = false;
-        
+
         // Copy the properties over onto the new prototype
         for (var name in prop) {
             // Check if we're overwriting an existing function
@@ -9174,21 +9174,21 @@ Tc.$ = jQuery.noConflict(false);
             fnTest.test(prop[name]) ? (function(name, fn){
                 return function(){
                     var tmp = this._super;
-                    
+
                     // Add a new ._super() method that is the same method
                     // but on the super-class
                     this._super = _super[name];
-                    
+
                     // The method only need to be bound temporarily, so we
                     // remove it when we're done executing
                     var ret = fn.apply(this, arguments);
                     this._super = tmp;
-                    
+
                     return ret;
                 };
             })(name, prop[name]) : prop[name];
         }
-        
+
         // The dummy class constructor
         function Class(){
             // All construction is actually done in the init method
@@ -9196,16 +9196,16 @@ Tc.$ = jQuery.noConflict(false);
 				this.init.apply(this, arguments);
 			}
         }
-        
+
         // Populate our constructed prototype object
         Class.prototype = prototype;
-        
+
         // Enforce the constructor to be what we expect
         Class.constructor = Class;
-        
+
         // And make this class extendable
         Class.extend = arguments.callee;
-        
+
         return Class;
     };
 })();
@@ -9213,7 +9213,7 @@ Tc.$ = jQuery.noConflict(false);
 /**
  * Contains the application base config.
  * The base config can be extended or overwritten either via
- * new Application ($ctx, config), during bootstrapping the application or via 
+ * new Application ($ctx, config), during bootstrapping the application or via
  * /public/js/Tc.Config.js in the project folder.
  *
  * @author Remo Brunschwiler
@@ -9222,7 +9222,7 @@ Tc.$ = jQuery.noConflict(false);
  * @static
  */
 Tc.Config = {
-    /** 
+    /**
      * The paths for the different types of dependencies.
      *
      * @property dependencyPath
@@ -9253,9 +9253,9 @@ Tc.Config = {
          * @method init
          * @return {void}
          * @constructor
-         * @param {jQuery} $ctx 
+         * @param {jQuery} $ctx
          *      The jquery context
-         * @param {Object} config 
+         * @param {Object} config
          *      The configuration
          */
         init: function($ctx, config) {
@@ -9302,7 +9302,7 @@ Tc.Config = {
             this.wildcardComponents = [];
 
             /**
-             * The sandbox to get the resources from 
+             * The sandbox to get the resources from
              * This sandbox is shared between all modules.
              *
              * @property sandbox
@@ -9313,13 +9313,13 @@ Tc.Config = {
 
         /**
          * Register modules withing scope
-         * Automatically registers all modules within the scope, 
+         * Automatically registers all modules within the scope,
          * as long as the modules use the OOCSS naming conventions.
          *
          * @method registerModules
-         * @param {jQuery} $ctx 
+         * @param {jQuery} $ctx
          *      The jQuery context.
-         * @return {Array} 
+         * @return {Array}
          *      A list containing the references of the registered modules.
          */
         registerModules : function($ctx) {
@@ -9335,7 +9335,7 @@ Tc.Config = {
                  * Indicates that it is a base module, this is the default and
                  * no JavaScript needs to be involved. It must occur excactly
                  * once.
-                 * @config .mod 
+                 * @config .mod
                  */
 
                 /**
@@ -9349,21 +9349,21 @@ Tc.Config = {
                  * Indicates that the module basic has the submarine skin. It
                  * will be decorated by the skin JS (if it exists). It can occur
                  * arbitrarily. Example: .skinBasicSubmarine
-                 * @config .skin{moduleName}{skinName} 
+                 * @config .skin{moduleName}{skinName}
                  */
 
-                /** 
+                /**
                  * A module can have a comma-separated list of data connectors.
                  * The list contains the IDs of the connectors in the following
                  * schema: {connectorName}{connectorId}{connectorRole}
-                 * 
-                 * The example MasterSlave1Master decodes to: name = 
+                 *
+                 * The example MasterSlave1Master decodes to: name =
                  * MasterSlave, id = 1, role = Master. This indicates that the
                  * module should notify the MasterSlave connector (the mediator)
                  * on all state changes. The connector id is used to chain the
                  * appropriate modules together and to improve the
                  * reusability of the connector. It can contain multiple
-                 * connector ids (e.g. 1,2,MasterSlave1Master). 
+                 * connector ids (e.g. 1,2,MasterSlave1Master).
                  *
                  * @config data-connectors
                  */
@@ -9410,7 +9410,7 @@ Tc.Config = {
          * Unregisters the modules given by the module instances.
          *
          * @method unregisterModule
-         * @param {Array} modules 
+         * @param {Array} modules
          *      A list containting the module instances to unregister
          * @return {void}
          */
@@ -9458,7 +9458,7 @@ Tc.Config = {
          * Starts (intializes) the registered modules.
          *
          * @method start
-         * @param {Array} modules 
+         * @param {Array} modules
          *      A list of the modules to start
          * @return {void}
          */
@@ -9498,7 +9498,7 @@ Tc.Config = {
          * Stops the registered modules.
          *
          * @method stop
-         * @param {Array} modules 
+         * @param {Array} modules
          *      A list containting the module instances to stop.
          * @return {void}
          */
@@ -9515,18 +9515,18 @@ Tc.Config = {
          * Registers a module.
          *
          * @method registerModule
-         * @param {jQuery} $node 
+         * @param {jQuery} $node
          *      The module node.
-         * @param {String} modName 
+         * @param {String} modName
          *      The module name. It must match the class name of the module
          *      (case sensitive).
-         * @param {Array} skins 
+         * @param {Array} skins
          *      A list of skin names. Each entry must match a class name of a
          *      skin (case sensitive).
-         * @param {Array} connectors 
+         * @param {Array} connectors
          *      A list of connectors identifiers (e.g. MasterSlave1Master).
          *      Schema: {connectorName}{connectorId}{connectorRole}
-         * @return {Module} 
+         * @return {Module}
          *      The reference to the registered module.
          */
         registerModule : function($node, modName, skins, connectors) {
@@ -9565,9 +9565,9 @@ Tc.Config = {
          * Registers a connection between a module and a connector.
          *
          * @method registerConnection
-         * @param {String} connector 
+         * @param {String} connector
          *      The full connector name (e.g. MasterSlave1Slave).
-         * @param {Module} component 
+         * @param {Module} component
          *      The module instance.
          * @return {void}
          */
@@ -9662,9 +9662,9 @@ Tc.Config = {
          * @method init
          * @return {void}
          * @constructor
-         * @param {Applicaton} application 
+         * @param {Applicaton} application
          *      The application reference
-         * @param {Object} config 
+         * @param {Object} config
          *      The configuration
          */
         init : function(application, config) {
@@ -9715,9 +9715,9 @@ Tc.Config = {
          * Adds (register and start) all modules in the given context scope.
          *
          * @method addModules
-         * @param {jQuery} $ctx 
+         * @param {jQuery} $ctx
          *      The jQuery context.
-         * @return {Array} 
+         * @return {Array}
          *      A list containing the references of the registered modules.
          */
         addModules: function($ctx) {
@@ -9740,7 +9740,7 @@ Tc.Config = {
          * This stops and unregisters a module through a module instance.
          *
          * @method removeModules
-         * @param {Array} modules 
+         * @param {Array} modules
          *      A list containting the module instances to remove.
          * @return {void}
          */
@@ -9802,9 +9802,9 @@ Tc.Config = {
          * Gets the appropriate module for the given ID.
          *
          * @method getModuleById
-         * @param {int} id 
+         * @param {int} id
          *      The module ID
-         * @return {Module} 
+         * @return {Module}
          *      The appropriate module
          */
         getModuleById: function(id) {
@@ -9814,7 +9814,7 @@ Tc.Config = {
                 return application.modules[id];
             }
             else {
-                throw new Error('the module with the id ' + id + 
+                throw new Error('the module with the id ' + id +
                                 ' does not exist');
             }
         },
@@ -9823,7 +9823,7 @@ Tc.Config = {
          * Gets the application config.
          *
          * @method getConfig
-         * @return {Object} 
+         * @return {Object}
          *      The configuration object
          */
         getConfig: function() {
@@ -9834,9 +9834,9 @@ Tc.Config = {
          * Gets an application config param.
          *
          * @method getConfigParam
-         * @param {String} name 
+         * @param {String} name
          *      The param name
-         * @return {mixed} 
+         * @return {mixed}
          *      The appropriate configuration param
          */
         getConfigParam: function(name) {
@@ -9854,14 +9854,14 @@ Tc.Config = {
          * Loads a requested dependency (if not already loaded).
          *
          * @method loadDependency
-         * @param {String} dependency 
+         * @param {String} dependency
          *      The dependency (e.g. swfobject.js)
-         * @param {String} type 
+         * @param {String} type
          *      The dependency type (plugin | library | util | url)
-         * @param {Function} callback 
+         * @param {Function} callback
          *      The callback to execute after the dependency has successfully
          *      loaded.
-         * @param {String} phase 
+         * @param {String} phase
          *      The module phase where the dependency is needed
          *      (e.g. beforeBinding, onBinding).
          * @return {void}
@@ -9870,11 +9870,11 @@ Tc.Config = {
             var that = this;
             // None indicates that it is not a dependency for a specific phase
 
-            phase = phase || 'none';             
+            phase = phase || 'none';
             type = type || 'plugin';
 
-            if (that.dependencies[dependency] && 
-            that.dependencies[dependency].state === 'requested') { 
+            if (that.dependencies[dependency] &&
+            that.dependencies[dependency].state === 'requested') {
                 /**
                  * Requested (but loading ist not finished) the module should
                  * be notified, if the dependency has loaded
@@ -9883,8 +9883,8 @@ Tc.Config = {
                     callback(phase);
                 });
             }
-            else if (that.dependencies[dependency] && 
-            that.dependencies[dependency].state === 'loaded') { 
+            else if (that.dependencies[dependency] &&
+            that.dependencies[dependency].state === 'loaded') {
                 // Loading finished
                 callback(phase);
             }
@@ -9913,12 +9913,12 @@ Tc.Config = {
                 // Load the appropriate dependency
                 var script = document.createElement('script'),
                     firstScript = this.firstScript;
-                
+
                 script.src = path + dependency;
 
                 script.onreadystatechange = script.onload = function () {
                     var readyState = script.readyState;
-                    if (!readyState || readyState == 'loaded' 
+                    if (!readyState || readyState == 'loaded'
                     || readyState == 'complete') {
                         that.dependencies[dependency].state = 'loaded';
                         callback(phase);
@@ -9943,7 +9943,7 @@ Tc.Config = {
          * This means that it is ready for afterBinding.
          *
          * @method readyForAfterBinding
-         * @param {Function} callback 
+         * @param {Function} callback
          *      The afterBinding module callback
          * @return {void}
          */
@@ -9981,11 +9981,11 @@ Tc.Config = {
          * @method init
          * @return {void}
          * @constructor
-         * @param {jQuery} $ctx 
+         * @param {jQuery} $ctx
          *      The jQuery context
-         * @param {Sandbox} sandbox 
+         * @param {Sandbox} sandbox
          *      The sandbox to get the resources from
-         * @param {String} modId 
+         * @param {String} modId
          *      The Unique module ID
          */
         init: function($ctx, sandbox, modId) {
@@ -10024,11 +10024,11 @@ Tc.Config = {
                 /**
                  * The following counters have to be at least zero, so that
                  * the onBinding callback is loaded as a dependency for
-                 * onBinding and the onBinding phase is completed for 
+                 * onBinding and the onBinding phase is completed for
                  * afterBinding.
                  */
                 onBinding: 1,
-                afterBinding: 1 
+                afterBinding: 1
             };
 
             /**
@@ -10065,7 +10065,7 @@ Tc.Config = {
          */
         stop: function() {
             var $ctx = this.$ctx;
-            
+
             // Remove all bound events and associated jQuery data
             $('*', $ctx).unbind().removeData();
             $ctx.unbind().removeData();
@@ -10080,7 +10080,7 @@ Tc.Config = {
         initBeforeBinding: function() {
             var that = this;
 
-            /** 
+            /**
              * Start the beforeBinding phase if there are no dependency for
              * this phase
              */
@@ -10104,7 +10104,7 @@ Tc.Config = {
 
         /**
          * Callback for the before binding phase.
-         * 
+         *
          * @method beforeBindingCallback
          * @return {void}
          */
@@ -10123,7 +10123,7 @@ Tc.Config = {
         initOnBinding: function() {
             var that = this;
 
-            /** 
+            /**
              * Start the onBinding phase if there are no dependencies for this
              * phase.
              */
@@ -10153,7 +10153,7 @@ Tc.Config = {
              * this phase
              */
             this.checkDependencies('afterBinding', function() {
-                /** 
+                /**
                  * Inform the sandbox that the module is ready for the
                  * afterBinding phase.
                  */
@@ -10175,9 +10175,9 @@ Tc.Config = {
          * Initializes the appropriate phase if all dependencies are loaded.
          *
          * @method checkDependencies
-         * @param {String} phase 
+         * @param {String} phase
          *      The phase to check / initialize
-         * @param {Function} callback 
+         * @param {Function} callback
          *      The callback to execute if all dependencies were loaded
          * @return {void}
          */
@@ -10192,14 +10192,14 @@ Tc.Config = {
          * Manages the required dependencies.
          *
          * @method require
-         * @param {String} dependency 
+         * @param {String} dependency
          *      The dependency (e.g. swfobject.js)
-         * @param {String} type 
+         * @param {String} type
          *      The dependency type (library | plugin | util | url)
-         * @param {String} phase 
+         * @param {String} phase
          *      The module phase where the dependency is needed
          *      (e.g. beforeBinding, onBinding)
-         * @param {boolean} executeCallback 
+         * @param {boolean} executeCallback
          *      Indicates whether the phase callback should be executed or not.
          *      This is useful for dependencies that provide their own callback
          *      mechanism.
@@ -10234,11 +10234,11 @@ Tc.Config = {
          * Notifies all attached connectors about changes.
          *
          * @method fire
-         * @param {String} state 
+         * @param {String} state
          *      The new state
-         * @param {Object} data 
+         * @param {Object} data
          *      The data to provide to your connected modules
-         * @param {Function} defaultAction 
+         * @param {Function} defaultAction
          *      The default action to perform
          * @return {void}
          */
@@ -10276,7 +10276,7 @@ Tc.Config = {
          * Attaches a connector (observer).
          *
          * @method attachConnector
-         * @param {Connector} connector 
+         * @param {Connector} connector
          *      The connector to attach
          * @return {void}
          */
@@ -10308,11 +10308,11 @@ Tc.Config = {
          * Decorates itself with the given skin.
          *
          * @method getDecoratedModule
-         * @param {String} module 
+         * @param {String} module
          *      The name of the module
-         * @param {String} skin 
+         * @param {String} skin
          *      The name of the skin
-         * @return {Module} 
+         * @return {Module}
          *      The decorated module
          */
         getDecoratedModule: function(module, skin) {
@@ -10365,9 +10365,9 @@ Tc.Config = {
          * Registers a component.
          *
          * @method registerComponent
-         * @param {Module} component 
+         * @param {Module} component
          *      The module to register
-         * @param {String} role 
+         * @param {String} role
          *      The role of the module (e.g. master, slave etc.)
          * @return {void}
          */
@@ -10384,7 +10384,7 @@ Tc.Config = {
          * Unregisters a component.
          *
          * @method unregisterComponent
-         * @param {Module} component 
+         * @param {Module} component
          *      The module to unregister
          * @return {void}
          */
@@ -10399,20 +10399,20 @@ Tc.Config = {
         },
 
         /**
-         * Notifies all registered components about a state change 
+         * Notifies all registered components about a state change
          * This can be be overriden in the specific connectors.
          *
          * @method notify
          * @param {Module} origin
          *      The module that sends the state change
-         * @param {String} state 
+         * @param {String} state
          *      The component's state
-         * @param {Object} data 
+         * @param {Object} data
          *      Contains the state relevant data (if any)
-         * @param {Function} callback 
+         * @param {Function} callback
          *      The callback function, it can be executed after an asynchronous
          *      action.
-         * @return {boolean} 
+         * @return {boolean}
          *      Indicates whether the default action should be excuted or not
          */
         notify: function(origin, state, data, callback) {
@@ -10422,7 +10422,7 @@ Tc.Config = {
              * afteraction from the events by returning false in the
              * on {Event}-Handler.
              */
-            
+
             var proceed = true,
                 components = this.components;
 
@@ -10459,16 +10459,16 @@ Tc.Utils = {};
          * Capitalizes the first letter of the given string.
          *
          * @method capitalize
-         * @param {String} str 
+         * @param {String} str
          *      The original string
-         * @return {String} 
+         * @return {String}
          *      The capitalized string
          */
         capitalize: function(str) {
             // Capitalize the first letter
             return str.substr(0, 1).toUpperCase().concat(str.substr(1));
         }
-    };   
+    };
 })(Tc.$);
 
 
@@ -10479,10 +10479,10 @@ Tc.Utils = {};
  * Developed and maintanined by Mark Perkins, mark@allmarkedup.com
  * Source repository: https://github.com/allmarkedup/jQuery-URL-Parser
  * Licensed under an MIT-style license. See https://github.com/allmarkedup/jQuery-URL-Parser/blob/master/LICENSE for details.
- */ 
+ */
 
 ;(function($, undefined) {
-    
+
     var tag2attr = {
         a       : 'href',
         img     : 'src',
@@ -10492,83 +10492,83 @@ Tc.Utils = {};
         iframe  : 'src',
         link    : 'href'
     },
-    
+
 	key = ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","fragment"], // keys available to query
-	
+
 	aliases = { "anchor" : "fragment" }, // aliases for backwards compatability
 
 	parser = {
 		strict  : /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*):?([^:@]*))?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,  //less intuitive, more accurate to the specs
 		loose   :  /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*):?([^:@]*))?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/ // more intuitive, fails on relative paths and deviates from specs
 	},
-	
+
 	querystring_parser = /(?:^|&|;)([^&=;]*)=?([^&;]*)/g, // supports both ampersand and semicolon-delimted query string key/value pairs
-	
+
 	fragment_parser = /(?:^|&|;)([^&=;]*)=?([^&;]*)/g; // supports both ampersand and semicolon-delimted fragment key/value pairs
-	
+
 	function parseUri( url, strictMode )
 	{
 		var str = decodeURI( url ),
 		    res   = parser[ strictMode || false ? "strict" : "loose" ].exec( str ),
 		    uri = { attr : {}, param : {}, seg : {} },
 		    i   = 14;
-		
+
 		while ( i-- )
 		{
 			uri.attr[ key[i] ] = res[i] || "";
 		}
-		
+
 		// build query and fragment parameters
-		
+
 		uri.param['query'] = {};
 		uri.param['fragment'] = {};
-		
+
 		uri.attr['query'].replace( querystring_parser, function ( $0, $1, $2 ){
 			if ($1)
 			{
 				uri.param['query'][$1] = $2;
 			}
 		});
-		
+
 		uri.attr['fragment'].replace( fragment_parser, function ( $0, $1, $2 ){
 			if ($1)
 			{
 				uri.param['fragment'][$1] = $2;
 			}
 		});
-				
+
 		// split path and fragement into segments
-		
+
         uri.seg['path'] = uri.attr.path.replace(/^\/+|\/+$/g,'').split('/');
-        
+
         uri.seg['fragment'] = uri.attr.fragment.replace(/^\/+|\/+$/g,'').split('/');
-        
+
         // compile a 'base' domain attribute
-        
+
         uri.attr['base'] = uri.attr.host ? uri.attr.protocol+"://"+uri.attr.host + (uri.attr.port ? ":"+uri.attr.port : '') : '';
-        
+
 		return uri;
 	};
-	
+
 	function getAttrName( elm )
 	{
 		var tn = elm.tagName;
 		if ( tn !== undefined ) return tag2attr[tn.toLowerCase()];
 		return tn;
 	}
-	
+
 	$.fn.url = function( strictMode )
 	{
 	    var url = '';
-	    
+
 	    if ( this.length )
 	    {
 	        url = $(this).attr( getAttrName(this[0]) ) || '';
 	    }
-	    
+
         return $.url( url, strictMode );
 	};
-	
+
 	$.url = function( url, strictMode )
 	{
 	    if ( arguments.length === 1 && url === true )
@@ -10576,65 +10576,65 @@ Tc.Utils = {};
             strictMode = true;
             url = undefined;
         }
-        
+
         strictMode = strictMode || false;
         url = url || window.location.toString();
-        	    	            
+
         return {
-            
+
             data : parseUri(url, strictMode),
-            
+
             // get various attributes from the URI
             attr : function( attr )
             {
                 attr = aliases[attr] || attr;
                 return attr !== undefined ? this.data.attr[attr] : this.data.attr;
             },
-            
+
             // return query string parameters
             param : function( param )
             {
                 return param !== undefined ? this.data.param.query[param] : this.data.param.query;
             },
-            
+
             // return fragment parameters
             fparam : function( param )
             {
                 return param !== undefined ? this.data.param.fragment[param] : this.data.param.fragment;
             },
-            
+
             // return path segments
             segment : function( seg )
             {
                 if ( seg === undefined )
                 {
-                    return this.data.seg.path;                    
+                    return this.data.seg.path;
                 }
                 else
                 {
                     seg = seg < 0 ? this.data.seg.path.length + seg : seg - 1; // negative segments count from the end
-                    return this.data.seg.path[seg];                    
+                    return this.data.seg.path[seg];
                 }
             },
-            
+
             // return fragment segments
             fsegment : function( seg )
             {
                 if ( seg === undefined )
                 {
-                    return this.data.seg.fragment;                    
+                    return this.data.seg.fragment;
                 }
                 else
                 {
                     seg = seg < 0 ? this.data.seg.fragment.length + seg : seg - 1; // negative segments count from the end
-                    return this.data.seg.fragment[seg];                    
+                    return this.data.seg.fragment[seg];
                 }
             }
-            
+
         };
-        
+
 	};
-	
+
 })(jQuery);
 //################################################################################
 
@@ -16675,4 +16675,3 @@ if (!JSON) {
 }(jQuery, window, window.document));
 
 //################################################################################
-
