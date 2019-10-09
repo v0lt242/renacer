@@ -9,7 +9,7 @@ baseurl: "/renacer" # the subpath of your site, e.g. /blog/
 baseu: ""
 url: "https://v0lt242.github.io" # the base hostname & protocol for your site
 twitter_username: jekyllrb
-github_username:  jekyll
+github_username:  v0lt242
 
 # Build settings
 markdown: kramdown
