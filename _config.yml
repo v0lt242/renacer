@@ -3,8 +3,8 @@ title: Renacer
 email: contacto@renacer.cl
 description: > # this means to ignore newlines until "baseurl:"
   Renacer es una agrupación de padres y madres que se formó el año 1993, con el propósito de acompañar a padres que viven la dolorosa experiencia de haber perdido uno o más hijos.
-baseurl: "//renacer" # the subpath of your site, e.g. /blog/
-url: "https://v0lt242.github.io" # the base hostname & protocol for your site
+baseurl: "/" # the subpath of your site, e.g. /blog/
+url: "https://v0lt242.github.io/renacer" # the base hostname & protocol for your site
 twitter_username: jekyllrb
 github_username:  jekyll
 
