@@ -1,10 +1,10 @@
 - name: Home
   path: "#top"
   section_id: home
-- name: About
+- name: quienes somos
   path: "#about"
   section_id: about
-- name: Services
+- name: Actividades
   path: "#services"
   section_id: services
 - name: Work
