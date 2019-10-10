@@ -13,6 +13,7 @@ github_username:  v0lt242
 
 # Build settings
 markdown: kramdown
-
+plugins:
+  - jekyll-paginate
 paginate: 4
 paginate_path: "blog/page:num"
